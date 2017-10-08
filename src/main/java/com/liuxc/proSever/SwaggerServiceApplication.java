@@ -11,6 +11,12 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * 启动访问路径 http://localhost:7009/swagger-ui.html
+ * 
+ * @since:2017年10月1日
+ * @author:liuxc
+ */
 @EnableSwagger2
 @SpringBootApplication
 public class SwaggerServiceApplication {
