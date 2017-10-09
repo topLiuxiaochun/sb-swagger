@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +24,25 @@ public class UserController {
 
 	static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
 	
+	@ApiOperation(value="获取用户列表", notes="")
+	@RequestMapping(value="", method=RequestMethod.GET)
 	public List<User> getUserList() {
 		List<User> userList = new ArrayList<User>(users.values());
 		return userList;
 	}
 	
+	@ApiOperation(value="创建用户", notes="根据user对象创建用户")
+	@ApiImplicitParam(name="user", value="用户实体bean", required=true, dataType="User")
+	@RequestMapping(value="", method=RequestMethod.POST)
 	public String postUser(@RequestBody User user) {
 		users.put(user.getId(), user);
 		return "success";
 	}
 	
-	public User getUser(@PathVariable Long id) {
+	@ApiOperation(value="获取用户信息", notes="根据ID获取用户信息")
+	@ApiImplicitParam(name="id", value="用户ID", required=true, dataType="Long")
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public User getUser(@PathVariable("id") Long id) {
 		return users.get(id);
 	}
 	
